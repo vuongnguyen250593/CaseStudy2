@@ -1,15 +1,15 @@
 package Manager;
-
 import Employee.Employee;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import Regex.Regex;
 
-import javax.swing.plaf.IconUIResource;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class EmployeeManager {
     ArrayList<Employee> employees = new ArrayList<>();
+    Regex regex = new Regex();
     Scanner scanner = new Scanner(System.in);
 
     public EmployeeManager() {
@@ -40,19 +40,64 @@ public class EmployeeManager {
     }
 
     public Employee createEmployee() {
-        System.out.print("- Enter ID: ");
-        int id = scanner.nextInt();
+        boolean checkId = false;
+        int id = 0;
+        while (!checkId){
+            System.out.print("- Enter ID: ");
+            id = scanner.nextInt();
+            if (employees.isEmpty()) {
+                checkId = true;
+            } else {
+                for (Employee e: employees) {
+                    if (id != e.getId()) {
+                        checkId = true;
+                        break;
+                    }
+                }
+            }
+            if (!checkId) {
+                System.out.println("The ID is already existence");
+            }
+        }
         scanner.nextLine();
         System.out.print("- Enter Name: ");
         String name = scanner.nextLine();
         scanner.nextLine();
         System.out.print("- Enter Age: ");
         int age = scanner.nextInt();
-        System.out.print("- Enter Phone number: ");
-        int phoneNumber = scanner.nextInt();
+        if (age < 18) {
+            System.out.println("Bạn không đủ tuổi lao động");
+            System.exit(0);
+        } else if (age > 60) {
+            System.out.println("Bạn đã quá tuổi lao động");
+            System.exit(0);
+        }
         scanner.nextLine();
-        System.out.print("- Enter Email: ");
-        String email = scanner.nextLine();
+        Pattern pattern = Pattern.compile("^[0][1-9]{9}$");
+        String phoneNumber = null;
+        boolean checkPhone = false;
+        while (!checkPhone) {
+            System.out.print("- Enter Phone number: ");
+            phoneNumber = scanner.nextLine();
+            if (pattern.matcher(phoneNumber).find()) {
+                checkPhone = true;
+            } else {
+                System.out.println("The phone number should be included 10 number with 0 first!");
+            }
+        }
+        scanner.nextLine();
+        Pattern pattern1 = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$");
+        String email = null;
+        boolean checkEmail = false;
+        while (!checkEmail) {
+            System.out.print("- Enter Email: ");
+            email = scanner.nextLine();
+            if (pattern1.matcher(email).find()) {
+                checkEmail = true;
+            } else {
+                System.out.println("Email is wrong!");
+            }
+        }
         scanner.nextLine();
         System.out.print("- Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  | --------- ");
         String department = null;
@@ -124,22 +169,23 @@ public class EmployeeManager {
         if (employee != null) {
             int index = employees.indexOf(employee);
             scanner.nextLine();
-            System.out.print("Re-Enter Name: ");
+            System.out.print("- Re-Enter Name: ");
             String name = scanner.nextLine();
             employee.setName(name);
             scanner.nextLine();
-            System.out.print("Re-Enter Age: ");
+            System.out.print("- Re-Enter Age: ");
             int age = scanner.nextInt();
             employee.setAge(age);
-            System.out.print("Re-Enter Phone number: ");
-            int phoneNumber = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("- Re-Enter Phone number: ");
+            String phoneNumber = scanner.nextLine();
             employee.setPhoneNumber(phoneNumber);
             scanner.nextLine();
-            System.out.print("Re-Enter Email: ");
+            System.out.print("- Re-Enter Email: ");
             String email = scanner.nextLine();
             employee.setEmail(email);
             scanner.nextLine();
-            System.out.print("Re-Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT   | ---------- ");
+            System.out.print("- Re-Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT   | ---------- ");
             String department = null;
             System.out.print("Your choice: ");
             int choiceDepartment = scanner.nextInt();
@@ -161,9 +207,9 @@ public class EmployeeManager {
                     break;
             }
             employee.setDepartment(department);
-            System.out.print("Re-Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
+            System.out.print("- Re-Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
             String jobType = null;
-            System.out.print("Your choice: ");
+            System.out.print("- Your choice: ");
             int choiceJobType = scanner.nextInt();
             switch (choiceJobType) {
                 case 1:
@@ -174,10 +220,10 @@ public class EmployeeManager {
                     break;
             }
             employee.setJobType(jobType);
-            System.out.print("Re-Enter Salary (million/month): ");
+            System.out.print("- Re-Enter Salary (million/month): ");
             double salary = scanner.nextDouble();
             employee.setSalary(salary);
-            System.out.print("Enter KPI: ");
+            System.out.print("- Enter KPI: ");
             int kpi = scanner.nextInt();
             employee.setKpi(kpi);
             employees.set(index, employee);
@@ -262,11 +308,12 @@ public class EmployeeManager {
             }
         }
     }
+
     public void writeFile() {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/IO/Employee.csv",true));
             for (Employee e: employees) {
-                bufferedWriter.write(e.toString());
+                bufferedWriter.write(e.display());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
@@ -286,11 +333,11 @@ public class EmployeeManager {
                 if (line == null) {
                     break;
                 }
-                String[] strings = line.split("\\s+");
+                String[] strings = line.split(",");
                 int id = Integer.parseInt(strings[0]);
                 String name = strings[1];
                 int age = Integer.parseInt(strings[2]);
-                int phoneNumber = Integer.parseInt(strings[3]);
+                String phoneNumber = strings[3];
                 String emmail = strings[4];
                 String department = strings[5];
                 String jopType = strings[6];

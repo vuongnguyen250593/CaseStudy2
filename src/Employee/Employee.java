@@ -4,7 +4,7 @@ public class Employee {
     private int id;
     private String name;
     private int age;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
     private String department;
     private String jobType;
@@ -14,7 +14,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String name, int age, int phoneNumber, String email, String department, String jobType, double salary, int kpi) {
+    public Employee(int id, String name, int age, String phoneNumber, String email, String department, String jobType, double salary, int kpi) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -50,11 +50,11 @@ public class Employee {
         this.age = age;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -100,6 +100,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format("%5d%15s%10d%20d%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
+        return String.format("%5d%15s%10d%20s%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
+    }
+
+    public String display() {
+        return id + "," + name + "," + age + "," + phoneNumber + "," + email + "," + department + "," + jobType + "," + salary + "," + kpi;
     }
 }

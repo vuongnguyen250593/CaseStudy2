@@ -9,7 +9,7 @@ public class Main {
         EmployeeManager employeeManager = new EmployeeManager();
         Scanner scanner = new Scanner(System.in);
         boolean check;
-        do {
+         do {
             System.out.println("Sign in with Admin Account");
             System.out.print("Account: ");
             String account = scanner.nextLine();
@@ -103,8 +103,8 @@ public class Main {
                                     break;
                                 case 11:
                                     System.out.println("11. Bonus by KPI");
-                                    System.out.printf("%15s%20s%10s%15s", "Name", "Department", "KPI", "0");
-                                    employeeManager.reviewByKPI();
+                                    System.out.printf("%15s%20s%10s%15s", "Name", "Department", "KPI", "Bonus (Million)");
+                                    employeeManager.bonusByKPI();
                                     break;
                                 case 12:
                                     System.out.println("12. Write to file.csv");
