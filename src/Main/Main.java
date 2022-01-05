@@ -45,19 +45,19 @@ public class Main {
                             switch (choice) {
                                 case 1:
                                     System.out.println("1. Display all Employee");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     System.out.println();
                                     employeeManager.displayAllEmployee();
                                     break;
                                 case 2:
                                     System.out.println("2. Display Part-time Employee");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> partTimeEmployee = employeeManager.displayPartTime();
                                     partTimeEmployee.forEach(System.out::println);
                                     break;
                                 case 3:
                                     System.out.println("3. Display Full-time Employee");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> fullTimeEmployee = employeeManager.displayFullTime();
                                     fullTimeEmployee.forEach(System.out::println);
                                     break;
@@ -82,7 +82,7 @@ public class Main {
                                 case 7:
                                     System.out.println("7. View an Employee by ID");
                                     System.out.print("Enter ID that you want to view: ");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     int viewId = scanner.nextInt();
                                     employeeManager.viewEmployee(viewId);
                                     break;
@@ -92,18 +92,18 @@ public class Main {
                                     break;
                                 case 9:
                                     System.out.println("9. Display Employee with max KPI");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> maxKPI = employeeManager.viewMaxKPI();
                                     maxKPI.forEach(System.out::println);
                                     break;
                                 case 10:
                                     System.out.println("10. Review Employee by KPI");
-                                    System.out.printf("%15s%20s%15s", "Name", "Department", "Review");
+                                    System.out.printf("%20s%20s%15s", "Name", "Department", "Review");
                                     employeeManager.reviewByKPI();
                                     break;
                                 case 11:
                                     System.out.println("11. Bonus by KPI");
-                                    System.out.printf("%15s%20s%10s%15s", "Name", "Department", "KPI", "Bonus (Million)");
+                                    System.out.printf("%20s%20s%10s%15s", "Name", "Department", "KPI", "Bonus (Million)");
                                     employeeManager.bonusByKPI();
                                     break;
                                 case 12:

@@ -100,7 +100,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format("%5d%15s%10d%20s%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
+        return String.format("%5d%20s%10d%20s%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
     }
 
     public String display() {

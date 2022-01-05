@@ -62,7 +62,6 @@ public class EmployeeManager {
         scanner.nextLine();
         System.out.print("- Enter Name: ");
         String name = scanner.nextLine();
-        scanner.nextLine();
         System.out.print("- Enter Age: ");
         int age = scanner.nextInt();
         if (age < 18) {
@@ -72,33 +71,30 @@ public class EmployeeManager {
             System.out.println("Bạn đã quá tuổi lao động");
             System.exit(0);
         }
-        scanner.nextLine();
-        Pattern pattern = Pattern.compile("^[0][1-9]{9}$");
+        Pattern phonePattern = Pattern.compile("^[0][1-9]{9}$");
         String phoneNumber = null;
         boolean checkPhone = false;
         while (!checkPhone) {
             System.out.print("- Enter Phone number: ");
-            phoneNumber = scanner.nextLine();
-            if (pattern.matcher(phoneNumber).find()) {
+            phoneNumber = scanner.next();
+            if (phonePattern.matcher(phoneNumber).find()) {
                 checkPhone = true;
             } else {
                 System.out.println("The phone number should be included 10 number with 0 first!");
             }
         }
-        scanner.nextLine();
-        Pattern pattern1 = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$");
+        Pattern emailPattern = Pattern.compile("^[A-Za-z0-9]+[A-Za-z0-9]*@[a-z]+(\\.[a-z]+)$");
         String email = null;
         boolean checkEmail = false;
         while (!checkEmail) {
             System.out.print("- Enter Email: ");
-            email = scanner.nextLine();
-            if (pattern1.matcher(email).find()) {
+            email = scanner.next();
+            if (emailPattern.matcher(email).find()) {
                 checkEmail = true;
             } else {
                 System.out.println("Email is wrong!");
             }
         }
-        scanner.nextLine();
         System.out.print("- Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  | --------- ");
         String department = null;
         System.out.print("Your choice: ");
