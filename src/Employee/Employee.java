@@ -100,16 +100,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [" +
-                "id = " + id +
-                ", name = '" + name + '\'' +
-                ", age = " + age +
-                ", phoneNumber = " + phoneNumber +
-                ", email = '" + email + '\'' +
-                ", department = '" + department + '\'' +
-                ", jobType = '" + jobType + '\'' +
-                ", salary = " + salary +
-                ", kpi = " + kpi +
-                ']';
+        return String.format("%5d%15s%10d%20d%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
     }
 }
