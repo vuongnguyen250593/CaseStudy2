@@ -1,24 +1,28 @@
 package Manager;
 import Employee.Employee;
-import Regex.Regex;
+import IO.CreateFile;
+import Interface.CRUD;
+import Interface.Display;
+import Interface.KPI;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class EmployeeManager {
+public class EmployeeManager implements Display, CRUD, KPI, CreateFile {
     ArrayList<Employee> employees = new ArrayList<>();
-    Regex regex = new Regex();
     Scanner scanner = new Scanner(System.in);
 
     public EmployeeManager() {
     }
 
+    @Override
     public void displayAllEmployee() {
         employees.forEach(System.out::println);
     }
 
+    @Override
     public ArrayList<Employee> displayPartTime() {
         ArrayList<Employee> partTimeEmployee = new ArrayList<>();
         for (Employee employee: employees) {
@@ -29,6 +33,7 @@ public class EmployeeManager {
         return partTimeEmployee;
     }
 
+    @Override
     public ArrayList<Employee> displayFullTime() {
         ArrayList<Employee> fullTimeEmployee = new ArrayList<>();
         for (Employee employee: employees) {
@@ -39,6 +44,7 @@ public class EmployeeManager {
         return fullTimeEmployee;
     }
 
+    @Override
     public Employee createEmployee() {
         boolean checkId = false;
         int id = 0;
@@ -135,11 +141,13 @@ public class EmployeeManager {
         return new Employee(id, name, age, phoneNumber, email, department, jobType, salary, kpi);
     }
 
+    @Override
     public void addEmployee(Employee employee) {
         employees.add(employee);
     }
 
-    public Employee deleteEmployee(int id) {
+    @Override
+    public void deleteEmployee(int id) {
         Employee employee = null;
         for (Employee e: employees) {
             if (e.getId() == id) {
@@ -152,10 +160,10 @@ public class EmployeeManager {
         } else {
             System.out.println("The ID is not existence!");
         }
-        return employee;
     }
 
-    public Employee updateEmployee(int id) {
+    @Override
+    public void updateEmployee(int id) {
         Employee employee = null;
         for (Employee e: employees) {
             if (e.getId() == id) {
@@ -227,10 +235,10 @@ public class EmployeeManager {
         } else {
             System.out.println("The ID is not existence!");
         }
-        return employee;
     }
 
-    public Employee viewEmployee(int id) {
+    @Override
+    public void viewEmployee(int id) {
         Employee employee = null;
         for (Employee e: employees) {
             if (e.getId() == id) {
@@ -242,41 +250,37 @@ public class EmployeeManager {
         } else {
             System.out.println("The ID is not existence!");
         }
-        return employee;
     }
 
+    @Override
     public void sortEmployeeByKPI() {
         employees.sort((o1, o2) -> {
             if (o1 != null && o2 != null) {
-                if (o1.getKpi() > o2.getKpi()) {
-                    return -1;
-                } else if (o1.getKpi() < o2.getKpi()) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                return Integer.compare(o2.getKpi(), o1.getKpi());
             } else {
                 return 0;
             }
         });
     }
 
+    @Override
     public ArrayList<Employee> viewMaxKPI() {
         ArrayList<Employee> maxKPI = new ArrayList<>();
         int max = employees.get(0).getKpi();
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getKpi() > max) {
-                max = employees.get(i).getKpi();
+        for (Employee employee : employees) {
+            if (employee.getKpi() > max) {
+                max = employee.getKpi();
             }
         }
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getKpi() == max) {
-                maxKPI.add(employees.get(i));
+        for (Employee employee : employees) {
+            if (employee.getKpi() == max) {
+                maxKPI.add(employee);
             }
         }
         return maxKPI;
     }
 
+    @Override
     public void reviewByKPI() {
         for (Employee e: employees) {
             if (e.getKpi() >= 1 && e.getKpi() <= 4) {
@@ -288,9 +292,11 @@ public class EmployeeManager {
             } else {
                 System.out.printf("%15s%20s%15s", e.getName(), e.getDepartment(), "Great");
             }
+            System.out.println();
         }
     }
 
+    @Override
     public void bonusByKPI() {
         for (Employee e: employees) {
             if (e.getKpi() >= 1 && e.getKpi() <= 4) {
@@ -305,9 +311,10 @@ public class EmployeeManager {
         }
     }
 
-    public void writeFile() {
+    @Override
+    public void writeFile(String pathName) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/IO/Employee.csv",true));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathName,true));
             for (Employee e: employees) {
                 bufferedWriter.write(e.display());
                 bufferedWriter.newLine();
@@ -319,11 +326,12 @@ public class EmployeeManager {
         }
     }
 
-    public ArrayList<Employee> readFile(){
+    @Override
+    public ArrayList<Employee> readFile(String pathName) {
         ArrayList<Employee> employees1 = new ArrayList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/IO/Employee.csv"));
-            String line = "";
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(pathName));
+            String line;
             while (true) {
                 line = bufferedReader.readLine();
                 if (line == null) {
@@ -344,6 +352,7 @@ public class EmployeeManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        employees = employees1;
         return employees1;
     }
 }

@@ -40,7 +40,7 @@ public class Main {
                         System.out.print("Enter your choice: ");
                         choice = scanner.nextInt();
                         System.out.println("____________________________________________________________");
-                        if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8 || choice == 9 || choice == 10 || choice == 11 || choice == 12 || choice == 13) {
+                        if (choice >= 1 && choice <= 13) {
                             check1 = true;
                             switch (choice) {
                                 case 1:
@@ -92,13 +92,14 @@ public class Main {
                                     break;
                                 case 9:
                                     System.out.println("9. Display Employee with max KPI");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
+                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s\n", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> maxKPI = employeeManager.viewMaxKPI();
                                     maxKPI.forEach(System.out::println);
                                     break;
                                 case 10:
                                     System.out.println("10. Review Employee by KPI");
                                     System.out.printf("%20s%20s%15s", "Name", "Department", "Review");
+                                    System.out.println();
                                     employeeManager.reviewByKPI();
                                     break;
                                 case 11:
@@ -108,11 +109,15 @@ public class Main {
                                     break;
                                 case 12:
                                     System.out.println("12. Write to file.csv");
-                                    employeeManager.writeFile();
+                                    System.out.print("Link File: ");
+                                    String write = scanner.next();
+                                    employeeManager.writeFile(write);
                                     break;
                                 case 13:
                                     System.out.println("13. Read from file.csv");
-                                    ArrayList<Employee> employee1 = employeeManager.readFile();
+                                    System.out.print("Link File: ");
+                                    String read = scanner.next();
+                                    ArrayList<Employee> employee1 = employeeManager.readFile(read);
                                     for (Employee e: employee1) {
                                         System.out.println(e);
                                     }
