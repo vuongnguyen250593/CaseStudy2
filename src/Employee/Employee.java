@@ -98,9 +98,20 @@ public class Employee {
         this.kpi = kpi;
     }
 
+    public void header() {
+        System.out.printf("%5s%20s%10s%20s%25s%20s%15s%20s%10s\n", "ID", "NAME", "AGE", "PHONE NUMBER", "EMAIL", "DEPARTMENT", "JOB-TYPE", "SALARY (million)", "KPI");
+        System.out.printf("%5s%20s%10s%20s%25s%20s%15s%20s%10s\n", "--", "----", "---", "------------", "-----", "----------", "--------", "----------------", "---");
+
+    }
+
+    public void footer() {
+        System.out.printf("%5s%20s%10s%20s%25s%20s%15s%20s%10s\n", "--", "----", "---", "------------", "-----", "----------", "--------", "----------------", "---");
+
+    }
+
     @Override
     public String toString() {
-        return String.format("%5d%20s%10d%20s%25s%20s%20s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
+        return String.format("%5d%20s%10d%20s%25s%20s%15s%20f%10d", id, name, age, phoneNumber, email, department, jobType, salary, kpi);
     }
 
     public String display() {

@@ -2,7 +2,7 @@ package Interface;
 
 import Employee.Employee;
 
-public interface CRUD {
+public interface Manager {
     Employee createEmployee();
 
     void addEmployee(Employee employee);

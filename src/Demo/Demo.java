@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Demo{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean check = false;
-        int choice;
-        while (!check) {
-            try {
+        try {
+            boolean check = false;
+            while (!check) {
                 System.out.print("Enter: ");
-                choice = scanner.nextInt();
+                int number = scanner.nextInt();
                 check = true;
-            } catch (Exception e) {
-                System.err.println("error");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

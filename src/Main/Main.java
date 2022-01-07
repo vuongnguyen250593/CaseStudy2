@@ -1,12 +1,15 @@
 package Main;
 import Employee.Employee;
 import Manager.EmployeeManager;
+import Manager.IOManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
+        IOManager ioManager = new IOManager();
         Scanner scanner = new Scanner(System.in);
         boolean check;
          do {
@@ -19,45 +22,41 @@ public class Main {
                 check = true;
                 int choice;
                 do {
-                    System.out.println("_____________________✫✫✫✫✫✫✫✫✫✫✫✫✫✫_____________________");
-                    System.out.println("| 1.  Display all Employee                                   |");
-                    System.out.println("| 2.  Display Part-time Employee                             |");
-                    System.out.println("| 3.  Display Full-time Employee                             |");
-                    System.out.println("| 4.  Add an Employee                                        |");
-                    System.out.println("| 5.  Delete an Employee by ID                               |");
-                    System.out.println("| 6.  Update an Employee by ID                               |");
-                    System.out.println("| 7.  View an Employee by ID                                 |");
-                    System.out.println("| 8.  Sort Employee by KPI                                   |");
-                    System.out.println("| 9.  Display Employee with max KPI                          |");
-                    System.out.println("| 10. Review Employee by KPI                                 |");
-                    System.out.println("| 11. Bonus by KPI                                           |");
-                    System.out.println("| 12. Write to file.csv                                      |");
-                    System.out.println("| 13. Read from file.csv                                     |");
-                    System.out.println("| 0.  Exit                                                   |");
-                    System.out.println("_____________________✫✫✫✫✫✫✫✫✫✫✫✫✫✫_____________________");
+                    System.out.println("------------------------✫✫✫✫✫✫✫✫✫✫✫✫✫✫------------------------");
+                    System.out.println("|   1.  Display all Employee                                       |");
+                    System.out.println("|   2.  Display Part-time Employee                                 |");
+                    System.out.println("|   3.  Display Full-time Employee                                 |");
+                    System.out.println("|   4.  Add an Employee                                            |");
+                    System.out.println("|   5.  Delete an Employee by ID                                   |");
+                    System.out.println("|   6.  Update an Employee by ID                                   |");
+                    System.out.println("|   7.  View an Employee by ID                                     |");
+                    System.out.println("|   8.  Sort Employee by KPI                                       |");
+                    System.out.println("|   9.  Display Employee with max KPI                              |");
+                    System.out.println("|   10. Review Employee by KPI                                     |");
+                    System.out.println("|   11. Bonus by KPI                                               |");
+                    System.out.println("|   12. Write to file.csv                                          |");
+                    System.out.println("|   13. Read from file.csv                                         |");
+                    System.out.println("|   0.  Exit                                                       |");
+                    System.out.println("------------------------✫✫✫✫✫✫✫✫✫✫✫✫✫✫------------------------");
                     boolean check1 = false;
                     do {
                         System.out.print("Enter your choice: ");
                         choice = scanner.nextInt();
-                        System.out.println("____________________________________________________________");
-                        if (choice >= 1 && choice <= 13) {
+                        System.out.println("________________________________________________________________");
+                        if (choice <= 13) {
                             check1 = true;
                             switch (choice) {
                                 case 1:
                                     System.out.println("1. Display all Employee");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
-                                    System.out.println();
                                     employeeManager.displayAllEmployee();
                                     break;
                                 case 2:
                                     System.out.println("2. Display Part-time Employee");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> partTimeEmployee = employeeManager.displayPartTime();
                                     partTimeEmployee.forEach(System.out::println);
                                     break;
                                 case 3:
                                     System.out.println("3. Display Full-time Employee");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> fullTimeEmployee = employeeManager.displayFullTime();
                                     fullTimeEmployee.forEach(System.out::println);
                                     break;
@@ -75,14 +74,12 @@ public class Main {
                                 case 6:
                                     System.out.println("6. Update an Employee by ID");
                                     System.out.print("Enter ID that you want to update: ");
-                                    System.out.printf("%5s%15s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     int updateId = scanner.nextInt();
                                     employeeManager.updateEmployee(updateId);
                                     break;
                                 case 7:
                                     System.out.println("7. View an Employee by ID");
                                     System.out.print("Enter ID that you want to view: ");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     int viewId = scanner.nextInt();
                                     employeeManager.viewEmployee(viewId);
                                     break;
@@ -92,46 +89,42 @@ public class Main {
                                     break;
                                 case 9:
                                     System.out.println("9. Display Employee with max KPI");
-                                    System.out.printf("%5s%20s%10s%20s%25s%20s%20s%20s%10s\n", "ID", "Name", "Age", "Phone number", "Email", "Department", "Job-type", "Salary", "KPI");
                                     ArrayList<Employee> maxKPI = employeeManager.viewMaxKPI();
                                     maxKPI.forEach(System.out::println);
                                     break;
                                 case 10:
                                     System.out.println("10. Review Employee by KPI");
-                                    System.out.printf("%20s%20s%15s", "Name", "Department", "Review");
-                                    System.out.println();
                                     employeeManager.reviewByKPI();
                                     break;
                                 case 11:
                                     System.out.println("11. Bonus by KPI");
-                                    System.out.printf("%20s%20s%10s%15s", "Name", "Department", "KPI", "Bonus (Million)");
                                     employeeManager.bonusByKPI();
                                     break;
                                 case 12:
                                     System.out.println("12. Write to file.csv");
                                     System.out.print("Link File: ");
                                     String write = scanner.next();
-                                    employeeManager.writeFile(write);
+                                    ioManager.writeFile(employeeManager.getEmployees(), write);
                                     break;
                                 case 13:
                                     System.out.println("13. Read from file.csv");
                                     System.out.print("Link File: ");
                                     String read = scanner.next();
-                                    ArrayList<Employee> employee1 = employeeManager.readFile(read);
+                                    ArrayList<Employee> employee1 = ioManager.readFile(read);
                                     for (Employee e: employee1) {
                                         System.out.println(e);
                                     }
                                     break;
                             }
                         } else {
-                            System.out.println("Do not have the number. Please Re-Enter!");
+                            System.out.println("☢ Do not have the number. Please Re-Enter!");
                         }
                     } while (!check1);
                 } while (true);
             } else {
-                System.out.println("---------------------------------------------------------------");
-                System.out.println("Account or password is not existence or error. Please Re-Enter!");
-                System.out.println("---------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------");
+                System.out.println("    ☢ Account or password is not existence or error. Please Re-Enter!");
+                System.out.println("-------------------------------------------------------------------");
                 check = false;
             }
         } while (true);
