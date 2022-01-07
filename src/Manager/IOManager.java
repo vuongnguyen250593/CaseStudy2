@@ -17,7 +17,7 @@ public class IOManager implements CreateFile {
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
-            System.out.println("    Wrote to File");
+            System.out.println("    Wrote to File!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +48,7 @@ public class IOManager implements CreateFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        EmployeeManager.employees = employees;
         return employees;
     }
 }

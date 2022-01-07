@@ -5,12 +5,11 @@ import Interface.Display;
 import Interface.KPI;
 import Regex.Regex;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmployeeManager implements Display, Manager, KPI{
-    ArrayList<Employee> employees = new ArrayList<>();
+    static ArrayList<Employee> employees = new ArrayList<>();
     Employee employee = new Employee();
     IOManager ioManager = new IOManager();
     Regex regex = new Regex();
@@ -35,6 +34,7 @@ public class EmployeeManager implements Display, Manager, KPI{
                 partTimeEmployee.add(employee);
             }
         }
+        employee.footer();
         return partTimeEmployee;
     }
 
@@ -47,6 +47,7 @@ public class EmployeeManager implements Display, Manager, KPI{
                 fullTimeEmployee.add(employee);
             }
         }
+        employee.footer();
         return fullTimeEmployee;
     }
 
@@ -275,6 +276,7 @@ public class EmployeeManager implements Display, Manager, KPI{
         if (employee != null) {
             employee.header();
             System.out.println(employee);
+            employee.footer();
         } else {
             System.out.println("    ☢ The ID is not existence!");
         }
@@ -291,6 +293,7 @@ public class EmployeeManager implements Display, Manager, KPI{
         });
         employee.header();
         employees.forEach(System.out::println);
+        employee.footer();
     }
 
     @Override
@@ -308,12 +311,14 @@ public class EmployeeManager implements Display, Manager, KPI{
                 maxKPI.add(employee);
             }
         }
+        employee.footer();
         return maxKPI;
     }
 
     @Override
     public void reviewByKPI() {
         System.out.printf("%5s%20s%20s%15s\n", "ID","NAME", "DEPARTMENT", "REVIEW");
+        System.out.printf("%5s%20s%20s%15s\n", "--","----", "----------", "------");
         for (Employee e: employees) {
             if (e.getKpi() >= 1 && e.getKpi() <= 4) {
                 System.out.printf("%5d%20s%20s%15s", e.getId(), e.getName(), e.getDepartment(), "BAD");
@@ -326,11 +331,13 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
             System.out.println();
         }
+        System.out.printf("%5s%20s%20s%15s\n", "--","----", "----------", "------");
     }
 
     @Override
     public void bonusByKPI() {
         System.out.printf("%5s%20s%20s%10s%20s\n", "ID", "NAME", "DEPARTMENT", "KPI", "BONUS (Million)");
+        System.out.printf("%5s%20s%20s%10s%20s\n", "--", "----", "----------", "---", "---------------");
         for (Employee e: employees) {
             if (e.getKpi() >= 1 && e.getKpi() <= 4) {
                 System.out.printf("%5d%20s%20s%10d%20s\n", e.getId(), e.getName(), e.getDepartment(), e.getKpi(), "0");
@@ -342,6 +349,7 @@ public class EmployeeManager implements Display, Manager, KPI{
                 System.out.printf("%5d%20s%20s%10d%20s\n", e.getId(), e.getName(), e.getDepartment(), e.getKpi(), "10");
             }
         }
+        System.out.printf("%5s%20s%20s%10s%20s\n", "--", "----", "----------", "---", "---------------");
     }
 
 //    @Override
