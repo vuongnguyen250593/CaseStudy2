@@ -17,7 +17,7 @@ public class IOManager implements CreateFile {
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
-            System.out.println("    Wrote to File!");
+            System.out.println("    Saved!");
         } catch (IOException e) {
             e.printStackTrace();
         }

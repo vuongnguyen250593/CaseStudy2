@@ -56,7 +56,7 @@ public class EmployeeManager implements Display, Manager, KPI{
         boolean checkId = false;
         int id = 0;
         while (!checkId){
-            System.out.print("- Enter ID: ");
+            System.out.print("✍️Enter ID: ");
             id = scanner.nextInt();
             if (employees.isEmpty()) {
                 checkId = true;
@@ -74,17 +74,17 @@ public class EmployeeManager implements Display, Manager, KPI{
         }
 
         scanner.nextLine();
-        System.out.print("- Enter Name: ");
+        System.out.print("✍️Enter Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("- Enter Age: ");
+        System.out.print("✍️Enter Age: ");
         int age = scanner.nextInt();
         regex.checkAge(age);
 
         String phoneNumber = null;
         boolean checkPhone = false;
         while (!checkPhone) {
-            System.out.print("- Enter Phone number: ");
+            System.out.print("✍️Enter Phone number: ");
             phoneNumber = scanner.next();
             if (regex.checkPhoneNumber(phoneNumber)) {
                 checkPhone = true;
@@ -94,14 +94,14 @@ public class EmployeeManager implements Display, Manager, KPI{
         String email = null;
         boolean checkEmail = false;
         while (!checkEmail) {
-            System.out.print("- Enter Email: ");
+            System.out.print("✍️Enter Email: ");
             email = scanner.next();
             if (regex.checkEmail(email)) {
                 checkEmail = true;
             }
         }
 
-        System.out.print("- Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  | --------- ");
+        System.out.print("✍️Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  | --------- ");
         System.out.print("Your choice: ");
         int choiceDepartment = scanner.nextInt();
         String department = null;
@@ -123,7 +123,7 @@ public class EmployeeManager implements Display, Manager, KPI{
                 break;
         }
 
-        System.out.print("- Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
+        System.out.print("✍️Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
         String jobType = null;
         System.out.print("Your choice: ");
         int choiceJobType = scanner.nextInt();
@@ -136,10 +136,10 @@ public class EmployeeManager implements Display, Manager, KPI{
                 break;
         }
 
-        System.out.print("- Enter Salary (million/month): ");
+        System.out.print("✍️Enter Salary (million/month): ");
         double salary = scanner.nextDouble();
 
-        System.out.print("- Enter KPI: ");
+        System.out.print("✍️Enter KPI: ");
         int kpi = scanner.nextInt();
 
         return new Employee(id, name, age, phoneNumber, email, department, jobType, salary, kpi);
@@ -182,11 +182,11 @@ public class EmployeeManager implements Display, Manager, KPI{
             int index = employees.indexOf(employee);
 
             scanner.nextLine();
-            System.out.print("- Re-Enter Name: ");
+            System.out.print("✍️Re-Enter Name: ");
             String name = scanner.nextLine();
             employee.setName(name);
 
-            System.out.print("- Re-Enter Age: ");
+            System.out.print("✍️Re-Enter Age: ");
             int age = scanner.nextInt();
             regex.checkAge(age);
             employee.setAge(age);
@@ -194,7 +194,7 @@ public class EmployeeManager implements Display, Manager, KPI{
             String phoneNumber = null;
             boolean checkPhone = false;
             while (!checkPhone) {
-                System.out.print("- Re-Enter Phone number: ");
+                System.out.print("✍️Re-Enter Phone number: ");
                 phoneNumber = scanner.next();
                 if (regex.checkPhoneNumber(phoneNumber)) {
                     checkPhone = true;
@@ -205,7 +205,7 @@ public class EmployeeManager implements Display, Manager, KPI{
             String email = null;
             boolean checkEmail = false;
             while (!checkEmail) {
-                System.out.print("- Enter Email: ");
+                System.out.print("✍️Enter Email: ");
                 email = scanner.next();
                 if (regex.checkEmail(email)) {
                     checkEmail = true;
@@ -213,7 +213,7 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
             employee.setEmail(email);
 
-            System.out.print("- Re-Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT   | ---------- ");
+            System.out.print("✍️Re-Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT   | ---------- ");
             String department = null;
             System.out.print("Your choice: ");
             int choiceDepartment = scanner.nextInt();
@@ -236,7 +236,7 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
             employee.setDepartment(department);
 
-            System.out.print("- Re-Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
+            System.out.print("✍️Re-Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
             String jobType = null;
             System.out.print("- Your choice: ");
             int choiceJobType = scanner.nextInt();
@@ -250,18 +250,18 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
             employee.setJobType(jobType);
 
-            System.out.print("- Re-Enter Salary (million/month): ");
+            System.out.print("✍️Re-Enter Salary (million/month): ");
             double salary = scanner.nextDouble();
             employee.setSalary(salary);
 
-            System.out.print("- Re-Enter KPI: ");
+            System.out.print("✍️Re-Enter KPI: ");
             int kpi = scanner.nextInt();
             employee.setKpi(kpi);
 
             employees.set(index, employee);
             System.out.println("    Update Successfully!");
         } else {
-            System.out.println("    ☢ The ID is not existence!");
+            System.out.println("    ☢ The ID is not existence");
         }
     }
 

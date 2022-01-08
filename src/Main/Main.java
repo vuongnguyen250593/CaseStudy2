@@ -3,7 +3,6 @@ import Employee.Employee;
 import Manager.EmployeeManager;
 import Manager.IOManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
@@ -11,13 +10,13 @@ public class Main {
         EmployeeManager employeeManager = new EmployeeManager();
         IOManager ioManager = new IOManager();
         Scanner scanner = new Scanner(System.in);
-        boolean check;
-         do {
-            System.out.println("Sign in with Admin Account");
-            System.out.print("Account: ");
-            String account = scanner.nextLine();
-            System.out.print("Password: ");
-            String pass = scanner.nextLine();
+        boolean check = false;
+        do {
+            System.out.printf("%47s\n", "Sign-in with Admin Account");
+            System.out.printf("%34s", "Account: ");
+            String account = scanner.next();
+            System.out.printf("%34s", "Password: ");
+            String pass = scanner.next();
             if (account.equals("admin") && pass.equals("123456789")) {
                 check = true;
                 int choice;
@@ -120,13 +119,13 @@ public class Main {
                             System.out.println("☢ Do not have the number. Please Re-Enter!");
                         }
                     } while (!check1);
-                } while (true);
+                } while (choice != 0);
             } else {
-                System.out.println("-------------------------------------------------------------------");
-                System.out.println("    ☢ Account or password is not existence or error. Please Re-Enter!");
-                System.out.println("-------------------------------------------------------------------");
-                check = false;
+                System.out.println("-------------------------------------------");
+                System.out.println("    ☢ Account or password is not existence.");
+                System.out.println("    ☢ You should log-in with supplied Admin Account.");
+                System.out.println("-------------------------------------------");
             }
-        } while (true);
+        } while (!check);
     }
 }
