@@ -11,5 +11,7 @@ public interface Display {
 
     ArrayList<Employee> displayFullTime();
 
-    void viewEmployee(int id);
+    ArrayList<Employee> viewEmployee(int id);
+
+    void sortEmployeeByID();
 }

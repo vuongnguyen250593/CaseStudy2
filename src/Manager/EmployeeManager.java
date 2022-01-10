@@ -28,26 +28,22 @@ public class EmployeeManager implements Display, Manager, KPI{
     @Override
     public ArrayList<Employee> displayPartTime() {
         ArrayList<Employee> partTimeEmployee = new ArrayList<>();
-        employee.header();
         for (Employee employee: employees) {
             if (employee.getJobType().equalsIgnoreCase("part-time")) {
                 partTimeEmployee.add(employee);
             }
         }
-        employee.footer();
         return partTimeEmployee;
     }
 
     @Override
     public ArrayList<Employee> displayFullTime() {
         ArrayList<Employee> fullTimeEmployee = new ArrayList<>();
-        employee.header();
         for (Employee employee: employees) {
             if (employee.getJobType().equalsIgnoreCase("full-time")) {
                 fullTimeEmployee.add(employee);
             }
         }
-        employee.footer();
         return fullTimeEmployee;
     }
 
@@ -101,8 +97,8 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
         }
 
-        System.out.print("✍️Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  | --------- ");
-        System.out.print("Your choice: ");
+        System.out.print("✍️Enter Department:  1. Finance  |  2. Marketing  |  3. Accounting  |  4. HR.  |  5. IT  |");
+        System.out.print(" ➤➤➤➤➤ Your choice: ");
         int choiceDepartment = scanner.nextInt();
         String department = null;
         switch (choiceDepartment) {
@@ -123,9 +119,9 @@ public class EmployeeManager implements Display, Manager, KPI{
                 break;
         }
 
-        System.out.print("✍️Enter Job-Type:  1. Full-time  |  2. Part-time  | ---------- ");
+        System.out.print("✍️Enter Job-Type:  1. Full-time  |  2. Part-time  |");
         String jobType = null;
-        System.out.print("Your choice: ");
+        System.out.print(" ➤➤➤➤➤ Your choice: ");
         int choiceJobType = scanner.nextInt();
         switch (choiceJobType) {
             case 1:
@@ -136,7 +132,7 @@ public class EmployeeManager implements Display, Manager, KPI{
                 break;
         }
 
-        System.out.print("✍️Enter Salary (million/month): ");
+        System.out.print("✍️Enter Salary (million): ");
         double salary = scanner.nextDouble();
 
         System.out.print("✍️Enter KPI: ");
@@ -250,7 +246,7 @@ public class EmployeeManager implements Display, Manager, KPI{
             }
             employee.setJobType(jobType);
 
-            System.out.print("✍️Re-Enter Salary (million/month): ");
+            System.out.print("✍️Re-Enter Salary (million): ");
             double salary = scanner.nextDouble();
             employee.setSalary(salary);
 
@@ -266,20 +262,28 @@ public class EmployeeManager implements Display, Manager, KPI{
     }
 
     @Override
-    public void viewEmployee(int id) {
-        Employee employee = null;
+    public ArrayList<Employee> viewEmployee(int id) {
+        ArrayList<Employee> employeeId = new ArrayList<>();
         for (Employee e: employees) {
             if (e.getId() == id) {
-                employee = e;
+                employeeId.add(e);
             }
         }
-        if (employee != null) {
-            employee.header();
-            System.out.println(employee);
-            employee.footer();
-        } else {
-            System.out.println("    ☢ The ID is not existence!");
-        }
+        return employeeId;
+    }
+
+    @Override
+    public void sortEmployeeByID() {
+        employees.sort((o1, o2) -> {
+            if (o1 != null && o2 != null) {
+                return Integer.compare(o1.getId(), o2.getId());
+            } else {
+                return 0;
+            }
+        });
+        employee.header();
+        employees.forEach(System.out::println);
+        employee.footer();
     }
 
     @Override

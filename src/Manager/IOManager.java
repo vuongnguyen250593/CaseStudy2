@@ -11,7 +11,7 @@ public class IOManager implements CreateFile {
     @Override
     public void writeFile(ArrayList<Employee> employees, String pathName) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathName,true));
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathName));
             for (Employee e: employees) {
                 bufferedWriter.write(e.display());
                 bufferedWriter.newLine();
