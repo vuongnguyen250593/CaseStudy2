@@ -51,13 +51,13 @@ public class EmployeeManager implements Display, Manager, KPI{
     public Employee createEmployee() {
         boolean checkId = false;
         int id = 0;
-        while (!checkId){
+        while (!checkId) {
             System.out.print("✍️Enter ID: ");
             id = scanner.nextInt();
             if (employees.isEmpty()) {
                 checkId = true;
             } else {
-                for (Employee e: employees) {
+                for (Employee e : employees) {
                     if (id != e.getId()) {
                         checkId = true;
                         break;
@@ -135,8 +135,18 @@ public class EmployeeManager implements Display, Manager, KPI{
         System.out.print("✍️Enter Salary (million): ");
         double salary = scanner.nextDouble();
 
-        System.out.print("✍️Enter KPI: ");
-        int kpi = scanner.nextInt();
+        boolean checkKpi = false;
+        int kpi;
+        do {
+            System.out.print("✍️Enter KPI: ");
+            kpi = scanner.nextInt();
+            if (kpi >= 1 && kpi <= 10) {
+                checkKpi = true;
+            } else {
+                System.out.println("    1 <= kpi <= 10");
+            }
+        } while (!checkKpi);
+
 
         return new Employee(id, name, age, phoneNumber, email, department, jobType, salary, kpi);
     }
@@ -250,8 +260,17 @@ public class EmployeeManager implements Display, Manager, KPI{
             double salary = scanner.nextDouble();
             employee.setSalary(salary);
 
-            System.out.print("✍️Re-Enter KPI: ");
-            int kpi = scanner.nextInt();
+            boolean checkKpi = false;
+            int kpi;
+            do {
+                System.out.print("✍️Re-Enter KPI: ");
+                kpi = scanner.nextInt();
+                if (kpi >= 1 && kpi <= 10) {
+                    checkKpi = true;
+                } else {
+                    System.out.println("    1 <= kpi <= 10");
+                }
+            } while (!checkKpi);
             employee.setKpi(kpi);
 
             employees.set(index, employee);
